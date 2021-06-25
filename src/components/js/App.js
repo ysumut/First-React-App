@@ -1,4 +1,5 @@
 import '../css/App.css';
+import UserConsumer from '../../contexts/UserContext';
 import User from './User';
 
 function App() {
@@ -8,12 +9,21 @@ function App() {
       <header>
         <h1>Kullanıcılar</h1>
         <div className="row">
-          <User id={1} name='Yusuf Umut Bulak' age={20} />
-          <User id={2} name='Mehmet Demir' age={35} />
-          <User id={3} age={75} />
-          <User id={4} age={50} />
-        </div>
+          
+          <UserConsumer>
+            {
+              value => {
+                const { users } = value; // get state from context
+                return (
+                  users.map(item => {
+                    return <User key={item.id} id={item.id} name={item.name} age={item.age} />
+                  })
+                );
+              }
+            }
+          </UserConsumer>
 
+        </div>
       </header>
     </div>
   );
