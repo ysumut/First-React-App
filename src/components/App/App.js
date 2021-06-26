@@ -1,6 +1,7 @@
-import '../css/App.css';
+import './App.css';
 import UserConsumer, { UserProvider } from '../../contexts/UserContext';
-import User from './User';
+import User from '../User/User';
+import UserForm from '../User/UserForm';
 
 function App() {
 
@@ -8,22 +9,21 @@ function App() {
     <UserProvider>
       <div className="container">
         <header>
-          <h1>Kullanıcılar</h1>
-          <div className="row">
+          <UserForm />
 
+          <div className="row">
             <UserConsumer>
               {
                 value => {
                   const { users } = value; // get state from context
                   return (
                     users.map(item => {
-                      return <User key={item.id} id={item.id} name={item.name} age={item.age} />
+                      return <User key={item.id} id={item.id} name={item.name} age={item.age} job={item.job} />
                     })
                   );
                 }
               }
             </UserConsumer>
-
           </div>
         </header>
       </div>
