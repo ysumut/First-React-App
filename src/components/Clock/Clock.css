@@ -1,0 +1,9 @@
+.clock {
+    background-color: rgb(80, 48, 223);
+    padding: 5px;
+}
+
+.clock:hover {
+    background-color: rgb(219, 91, 129);
+    padding: 10px;
+}

@@ -3,7 +3,7 @@ import UserConsumer from '../../contexts/UserContext'
 
 class UserForm extends Component {
     state = {
-        name: '', age: '', job: '', formIsVisible: true
+        name: '', age: '', job: '', formIsVisible: true, successAlert: false
     }
 
     toggleFormVisibility = (e) => {
@@ -19,25 +19,31 @@ class UserForm extends Component {
     }
 
     addUser = (dispatch, e) => {
-        const state = this.state;
+        const { name, age, job } = this.state;
         dispatch({
             type: "ADD",
             payload: {
-                name: state.name,
-                age: parseInt(state.age),
-                job: state.job
+                name,
+                age: parseInt(age),
+                job
             }
         });
 
-        this.setState({ name: '', age: '', job: '' });
+        this.setState({ name: '', age: '', job: '', successAlert: true });
     }
 
     render() {
-        const { name, age, job, formIsVisible } = this.state;
+        const { name, age, job, formIsVisible, successAlert } = this.state;
 
         return (
             <div className="d-flex justify-content-center m-5">
                 <div className="card col col-md-4">
+                    {
+                        successAlert &&
+                        <div className="alert alert-success" role="alert">
+                            User successfully added!
+                        </div>
+                    }
                     <div className="card-header d-flex justify-content-between">
                         <h4 className="card-title">User</h4>
                         <button className="btn btn-outline-secondary btn-sm" onClick={this.toggleFormVisibility}>

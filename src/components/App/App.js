@@ -2,6 +2,7 @@ import './App.css';
 import UserConsumer, { UserProvider } from '../../contexts/UserContext';
 import User from '../User/User';
 import UserForm from '../User/UserForm';
+import Clock from '../Clock/Clock';
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
     <UserProvider>
       <div className="container">
         <header>
+          <Clock />
           <UserForm />
 
           <div className="row">
