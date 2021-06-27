@@ -12,7 +12,7 @@ const reducer = (action, state) => {
         case "ADD":
             const users = state.users;
             const new_user = {
-                id: Math.max(...users.map(u => u.id)) + 1,
+                id: users.length === 0 ? 1 : Math.max(...users.map(u => u.id)) + 1,
                 ...action.payload
             }
             return { users: [...users, new_user] };

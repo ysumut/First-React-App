@@ -24,11 +24,11 @@ class User extends Component {
                     value => {
                         const { dispatch } = value;
                         return (
-                            <div className="col-3" >
+                            <div className="col-md-3" >
                                 <div className="card">
                                     <div className="card-header d-flex justify-content-between">
                                         <p className="card-title"><b>ID: </b>{id}</p>
-                                        <button className="btn btn-danger btn-sm" onClick={this.removeUser.bind(this, dispatch)}>Kaldır</button>
+                                        <button className="btn btn-danger btn-sm" onClick={this.removeUser.bind(this, dispatch)}>Remove</button>
                                     </div>
                                     <div className="card-body">
                                         <p><b>Full Name: </b>{name}</p>

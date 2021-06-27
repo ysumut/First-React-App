@@ -22,16 +22,18 @@ class UserForm extends Component {
         const state = this.state;
         dispatch({
             type: "ADD",
-            payload: { 
-                name: state.name, 
-                age: parseInt(state.age), 
-                job: state.job 
+            payload: {
+                name: state.name,
+                age: parseInt(state.age),
+                job: state.job
             }
         });
+
+        this.setState({ name: '', age: '', job: '' });
     }
 
     render() {
-        const { formIsVisible } = this.state;
+        const { name, age, job, formIsVisible } = this.state;
 
         return (
             <div className="d-flex justify-content-center m-5">
@@ -48,22 +50,22 @@ class UserForm extends Component {
                             <form>
                                 <div className="mb-3">
                                     <label htmlFor="name-input" className="form-label">Full Name</label>
-                                    <input type="text" className="form-control" id="name-input" name="name" onChange={this.changeState} />
+                                    <input type="text" value={name} className="form-control" id="name-input" name="name" onChange={this.changeState} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="age-input" className="form-label">Age</label>
-                                    <input type="number" className="form-control" id="age-input" name="age" onChange={this.changeState} />
+                                    <input type="number" value={age} className="form-control" id="age-input" name="age" onChange={this.changeState} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="job-input" className="form-label">Job</label>
-                                    <input type="text" className="form-control" id="job-input" name="job" onChange={this.changeState} />
+                                    <input type="text" value={job} className="form-control" id="job-input" name="job" onChange={this.changeState} />
                                 </div>
 
                                 <UserConsumer>
                                     {
                                         value => {
                                             const { dispatch } = value;
-                                            return(
+                                            return (
                                                 <button type="button" className="btn btn-primary" onClick={this.addUser.bind(this, dispatch)}>Add</button>
                                             );
                                         }
