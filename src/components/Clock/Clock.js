@@ -18,7 +18,7 @@ class Clock extends Component {
 
     render() {
         return (
-            <div className="float-end border border-info border-3 rounded-pill text-white clock">
+            <div className="clock">
                 <span>{this.state.time}</span>
             </div>
         )

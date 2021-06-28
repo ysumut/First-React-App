@@ -1,9 +1,22 @@
 .clock {
-    background-color: rgb(80, 48, 223);
+    background-color: rgb(90, 59, 224);
     padding: 5px;
+    float: right;
+    border: #5bc0de 3px solid;
+    border-radius: 25px;
+    color: white;
+    text-align: center;
 }
 
 .clock:hover {
-    background-color: rgb(219, 91, 129);
+    background-color: black;
     padding: 10px;
 }
+
+@media only screen and (max-width: 1000px) {
+    .clock {
+        float: none;
+        margin: 10px auto auto auto;
+        width: 25%;
+    }
+  }
