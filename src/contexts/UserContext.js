@@ -4,34 +4,60 @@ const UserContext = React.createContext();
 const UserConsumer = UserContext.Consumer;
 
 const reducer = (action, state) => {
+    const { users, form_user } = state;
+
     switch (action.type) {
-        case "DELETE":
-            return {
-                users: state.users.filter(item => item.id !== action.payload.id)
-            }
         case "ADD":
-            const users = state.users;
             const new_user = {
                 id: users.length === 0 ? 1 : Math.max(...users.map(u => u.id)) + 1,
-                ...action.payload
+                name: form_user.name,
+                age: parseInt(form_user.age),
+                job: form_user.job
             }
             return { users: [...users, new_user] };
+        case "SET_FORM_USER":
+            return {
+                form_user: { ...state.form_user, ...action.payload }
+            }
+        case "SET_EDIT_INFO":
+            const id = action.payload.id;
+            const { name, age, job } = users.find(item => item.id === id);
+            return {
+                form_user: { id, name, age, job }
+            }
+        case "EDIT":
+            const edit_user = {
+                name: form_user.name,
+                age: parseInt(form_user.age),
+                job: form_user.job
+            }
+            const index = users.findIndex(item => item.id === form_user.id);
+            users[index] = { ...users[index], ...edit_user };
+
+            return { users };
+        case "DELETE":
+            return {
+                users: users.filter(item => item.id !== action.payload.id)
+            }
+        case "CLEAR_FORM":
+            return {
+                form_user: { id: null, name: '', age: '', job: '' }
+            }
         default:
-            return { users: state.users };
+            return {};
     }
 }
 
 export class UserProvider extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            users: [],
-            dispatch: action => {
-                this.setState(state => reducer(action, state));
-            }
+    state = {
+        users: [],
+        form_user: { id: null, name: '', age: '', job: '' },
+        dispatch: action => {
+            this.setState(state => reducer(action, state));
         }
+    }
 
+    componentDidMount = () => {
         const userList = [];
         const names = ['Yusuf', 'Umut', 'Bulak', 'Mehmet', 'Uçar', 'Sinem', 'Gündüz', 'Yeşim', 'Bulut', 'Ahmet', 'Hamdi', 'Dağ', 'Nimet'];
         const jobs = ['Engineer', 'Doctor', 'Artist', 'Teacher', 'Lawyer', 'Writer'];
@@ -49,7 +75,7 @@ export class UserProvider extends Component {
             });
         }
 
-        this.state.users = userList;
+        this.setState({ users: userList });
     }
 
     render() {

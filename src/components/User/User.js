@@ -7,6 +7,15 @@ class User extends Component {
 
     }
 
+    setEditUser = (dispatch, e) => {
+        const { id } = this.props;
+        dispatch({
+            type: "SET_EDIT_INFO",
+            payload: { id }
+        })
+        window.scrollTo(0,0);
+    }
+
     removeUser = (dispatch, e) => {
         const { id } = this.props;
         dispatch({
@@ -28,7 +37,10 @@ class User extends Component {
                                 <div className="card">
                                     <div className="card-header d-flex justify-content-between">
                                         <p className="card-title"><b>ID: </b>{id}</p>
-                                        <button className="btn btn-danger btn-sm" onClick={this.removeUser.bind(this, dispatch)}>Remove</button>
+                                        <div className="btn-group" role="group">
+                                            <button className="btn btn-outline-success btn-sm" onClick={this.setEditUser.bind(this, dispatch)}>Edit</button>
+                                            <button className="btn btn-danger btn-sm" onClick={this.removeUser.bind(this, dispatch)}>Remove</button>
+                                        </div>
                                     </div>
                                     <div className="card-body">
                                         <p><b>Full Name: </b>{name}</p>
