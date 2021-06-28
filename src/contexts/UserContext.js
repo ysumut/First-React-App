@@ -37,7 +37,8 @@ const reducer = (action, state) => {
             return { users };
         case "DELETE":
             return {
-                users: users.filter(item => item.id !== action.payload.id)
+                users: users.filter(item => item.id !== action.payload.id),
+                form_user: { id: null, name: '', age: '', job: '' }
             }
         case "CLEAR_FORM":
             return {
